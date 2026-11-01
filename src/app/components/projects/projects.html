@@ -1,0 +1,156 @@
+<section id="projetos" class="section">
+  <div class="container">
+    <header class="section-head" appReveal>
+      <span class="eyebrow">// projetos</span>
+      <h2>O que eu já construí</h2>
+      <p>
+        Projetos profissionais e pessoais/acadêmicos disponíveis no GitHub.
+      </p>
+    </header>
+
+    <div class="filters" role="tablist" aria-label="Filtrar projetos" appReveal>
+      @for (f of filters; track f.id) {
+        <button
+          type="button"
+          role="tab"
+          [attr.aria-selected]="filter() === f.id"
+          [class.active]="filter() === f.id"
+          (click)="select(f.id)"
+        >
+          {{ f.label }} <span class="count">{{ count(f.id) }}</span>
+        </button>
+      }
+    </div>
+
+    <div class="grid">
+      @for (project of visible(); track project.title) {
+        <article class="card project" [class.featured]="project.featured">
+          <header>
+            <span class="folder" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="26" height="26">
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linejoin="round"
+                  d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"
+                />
+              </svg>
+            </span>
+            <div class="links">
+              @if (project.repo) {
+                <a
+                  [href]="project.repo"
+                  target="_blank"
+                  rel="noopener"
+                  [attr.aria-label]="'Código de ' + project.title"
+                  title="Código"
+                >
+                  <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m8 6-6 6 6 6M16 6l6 6-6 6"
+                    />
+                  </svg>
+                </a>
+              }
+              @if (project.demo) {
+                <a
+                  [href]="project.demo"
+                  target="_blank"
+                  rel="noopener"
+                  [attr.aria-label]="'Demo de ' + project.title"
+                  title="Ver online"
+                >
+                  <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                    />
+                  </svg>
+                </a>
+              }
+              @if (project.private) {
+                <span class="badge" title="Código proprietário">
+                  <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      d="M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3"
+                    />
+                  </svg>
+                  Privado
+                </span>
+              }
+            </div>
+          </header>
+
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.description }}</p>
+
+          <footer class="chip-list">
+            @for (tech of project.stack; track tech) {
+              <span class="chip">{{ tech }}</span>
+            }
+          </footer>
+        </article>
+      }
+    </div>
+
+    @if (hiddenCount() > 0) {
+      <div class="more">
+        <button type="button" class="btn btn-ghost" (click)="showAll.set(true)">
+          Ver mais {{ hiddenCount() }} projetos
+        </button>
+      </div>
+    }
+
+    <!-- Atividade recente no GitHub (carregada em tempo real) -->
+    <div class="github" appReveal>
+      <div class="github-head">
+        <h3>Atividade recente no GitHub</h3>
+        @if (github.user(); as user) {
+          <span class="muted">{{ user.public_repos }} repositórios públicos</span>
+        }
+        <a [href]="profile.github" target="_blank" rel="noopener" class="btn btn-ghost">
+          &#64;{{ profile.githubUser }} ↗
+        </a>
+      </div>
+
+      @let repos = github.recentRepos();
+      @if (repos === undefined) {
+        <div class="repos">
+          @for (i of [1, 2, 3]; track i) {
+            <div class="repo skeleton"></div>
+          }
+        </div>
+      } @else if (repos === null) {
+        <p class="muted">Não foi possível carregar os repositórios agora. Veja direto no GitHub.</p>
+      } @else {
+        <div class="repos">
+          @for (repo of repos; track repo.name) {
+            <a class="card repo" [href]="repo.html_url" target="_blank" rel="noopener">
+              <strong>{{ repo.name }}</strong>
+              <span class="muted">{{ repo.description || 'Sem descrição' }}</span>
+              <span class="meta">
+                @if (repo.language) {
+                  <span><i class="lang-dot"></i>{{ repo.language }}</span>
+                }
+                <span>atualizado {{ repo.updated_at | date: 'MM/yyyy' }}</span>
+              </span>
+            </a>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>

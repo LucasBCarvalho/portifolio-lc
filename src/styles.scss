@@ -1,1 +1,247 @@
-/* You can add global styles to this file, and also import other style files */
+/* ===== Tokens ===== */
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0a0d14;
+  --bg-elevated: #111622;
+  --bg-card: #141a28;
+  --border: #232b3d;
+  --text: #e7eaf2;
+  --text-muted: #9aa3b8;
+  --accent-a: #ff4d6d; /* Angular */
+  --accent-b: #8b93ff; /* PHP */
+  --accent: #ff6b85;
+  --success: #3ddc97;
+  --gradient: linear-gradient(120deg, var(--accent-a), var(--accent-b));
+  --shadow: 0 10px 40px -12px rgb(0 0 0 / 0.6);
+  --glow:
+    radial-gradient(600px circle at 20% 10%, rgb(255 77 109 / 0.12), transparent 60%),
+    radial-gradient(700px circle at 85% 30%, rgb(139 147 255 / 0.12), transparent 60%);
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-elevated: #f4f5f9;
+  --bg-card: #ffffff;
+  --border: #e2e5ee;
+  --text: #141824;
+  --text-muted: #5b6478;
+  --accent-a: #dd0031;
+  --accent-b: #5b63d3;
+  --accent: #c8102e;
+  --success: #12945e;
+  --shadow: 0 10px 30px -12px rgb(20 24 36 / 0.15);
+  --glow:
+    radial-gradient(600px circle at 20% 10%, rgb(221 0 49 / 0.07), transparent 60%),
+    radial-gradient(700px circle at 85% 30%, rgb(91 99 211 / 0.08), transparent 60%);
+}
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', var(--font-sans);
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --radius: 14px;
+  --container: 1120px;
+  --nav-h: 68px;
+}
+
+/* ===== Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  background-image: var(--glow);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: var(--accent-a);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-b);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ===== Layout helpers ===== */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+.section {
+  padding-block: 96px;
+
+  @media (max-width: 720px) {
+    padding-block: 64px;
+  }
+}
+
+.section-head {
+  margin-bottom: 48px;
+  max-width: 680px;
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  h2 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    margin-top: 8px;
+  }
+
+  p {
+    color: var(--text-muted);
+    margin-top: 12px;
+  }
+}
+
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition:
+    border-color 0.25s,
+    transform 0.25s,
+    box-shadow 0.25s;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    background-color 0.2s,
+    border-color 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &-primary {
+    background: var(--gradient) border-box;
+    color: #fff;
+    box-shadow: 0 8px 24px -8px var(--accent-a);
+  }
+
+  &-ghost {
+    border-color: var(--border);
+    background: var(--bg-elevated);
+    color: var(--text);
+
+    &:hover {
+      border-color: var(--accent-b);
+    }
+  }
+}
+
+/* ===== Chips ===== */
+.chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-b) 12%, transparent);
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--accent-b) 25%, transparent);
+  white-space: nowrap;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ===== Reveal animation ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

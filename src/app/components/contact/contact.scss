@@ -1,0 +1,108 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 28px;
+  align-items: start;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.channels {
+  display: grid;
+  gap: 14px;
+}
+
+.channel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--accent-b);
+    transform: translateX(4px);
+  }
+
+  .ico {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--gradient);
+    color: #fff;
+  }
+
+  .info {
+    display: grid;
+    min-width: 0;
+  }
+
+  small {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  strong {
+    overflow-wrap: anywhere;
+    font-weight: 600;
+  }
+}
+
+.form {
+  padding: 28px;
+  display: grid;
+  gap: 18px;
+
+  label {
+    display: grid;
+    gap: 6px;
+
+    > span {
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+    resize: vertical;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent-b);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-b) 20%, transparent);
+    }
+
+    &.ng-invalid.ng-touched {
+      border-color: var(--accent-a);
+    }
+  }
+
+  .error {
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  .btn {
+    justify-self: start;
+  }
+}
