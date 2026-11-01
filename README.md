@@ -1,4 +1,4 @@
-# Portfólio — Lucas Carvalho
+# Portfólio - Lucas Carvalho
 
 Portfólio pessoal em **Angular 21** (standalone components, signals, zoneless, SCSS).
 
@@ -31,5 +31,5 @@ src/app/
 
 ## Deploy (Vercel)
 
-Importe o repositório na Vercel — o preset Angular é detectado automaticamente.
+Importe o repositório na Vercel, o preset Angular é detectado automaticamente.
 Output directory: `dist/portfolio/browser`.
