@@ -24,7 +24,7 @@ export const PROFILE: Profile = {
   avatar: 'https://avatars.githubusercontent.com/u/105558309?v=4',
   about: [
     'Sou desenvolvedor full stack, formado em Ciência da Computação e pós-graduado em Arquitetura de Software. Atualmente, curso pós-graduação em Inteligência Artificial e Data Science.',
-    'No back-end, trabalho com PHP 8 e MySQL no desenvolvimento e na manutenção de sistemas web. Conduzi a migração de um WMS para o PHP 8 e sua conteinerização com Docker, além de desenvolver APIs de integração e a emissão de NF-e junto à SEFAZ. No front-end, construo interfaces com Angular, TypeScript e PrimeNG, e atualmente conduzo a migração de uma aplicação do Angular 13 para o 22.',
+    'No back-end, trabalho com PHP 8 e MySQL no desenvolvimento e na manutenção de sistemas web. Conduzi a migração de um WMS para o PHP 8 e sua conteinerização com Docker, além de desenvolver APIs de integração e a emissão de NF-e junto à SEFAZ. No front-end, construo interfaces com Angular, TypeScript e PrimeNG, e atualmente conduzo a migração de uma aplicação do Angular 14.2 para o 20.3.',
     'Tenho foco em IA aplicada a sistemas reais: desenvolvi e coloquei em produção um chatbot para o WMS baseado em RAG e MCP, integrado ao Gemini, à OpenAI e ao Ollama. Gosto de resolver problemas com código limpo, boa arquitetura e automação.',
   ],
   highlights: [
@@ -194,6 +194,15 @@ export const PROJECTS: Project[] = [
       'Modernização de um sistema de gerenciamento de armazém: atualização para PHP 8, correções de compatibilidade, otimização de queries e ambientes conteinerizados com Docker.',
     stack: ['PHP 8', 'MySQL', 'Docker', 'Linux'],
     categories: ['profissional', 'php'],
+    featured: true,
+    private: true,
+  },
+  {
+    title: 'Migração de sistema legado Angular 14.2 → 20.3',
+    description:
+      'Migração de um sistema legado da FIEMT do Angular 14.2 para o Angular 20.3, modernizando arquitetura, componentes e práticas de front-end, com um novo template de interface em PrimeNG padronizando o visual e a usabilidade.',
+    stack: ['Angular 20', 'TypeScript', 'PrimeNG', 'Microsoft Entra ID'],
+    categories: ['profissional', 'angular'],
     featured: true,
     private: true,
   },

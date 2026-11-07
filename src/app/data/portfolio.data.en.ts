@@ -21,7 +21,7 @@ const PROFILE_EN: Profile = {
   location: 'Lauro de Freitas - BA, Brazil',
   about: [
     "I'm a full-stack developer with a Bachelor's degree in Computer Science and a postgraduate degree in Software Architecture. I'm currently pursuing a postgraduate degree in Artificial Intelligence and Data Science.",
-    "On the back end, I work with PHP 8 and MySQL, developing and maintaining web systems. I led the migration of a WMS to PHP 8 and its containerization with Docker, and built integration APIs and electronic invoice (NF-e) issuance with SEFAZ, Brazil's tax authority. On the front end, I build interfaces with Angular, TypeScript and PrimeNG, and I'm currently leading the migration of an application from Angular 13 to 22.",
+    "On the back end, I work with PHP 8 and MySQL, developing and maintaining web systems. I led the migration of a WMS to PHP 8 and its containerization with Docker, and built integration APIs and electronic invoice (NF-e) issuance with SEFAZ, Brazil's tax authority. On the front end, I build interfaces with Angular, TypeScript and PrimeNG, and I'm currently leading the migration of an application from Angular 14.2 to 20.3.",
     'I focus on AI applied to real systems: I built and shipped to production a RAG- and MCP-based chatbot for the WMS, integrated with Gemini, OpenAI and Ollama. I enjoy solving problems with clean code, solid architecture and automation.',
   ],
   highlights: [
@@ -180,6 +180,11 @@ const PROJECT_TRANSLATIONS: Record<string, Partial<Project>> = {
     title: 'Electronic Invoice API (NF-e / SEFAZ)',
     description:
       "In-house API for issuing Brazilian electronic invoices integrated with SEFAZ (the state tax authority), connected to the company's internal systems.",
+  },
+  'Migração de sistema legado Angular 14.2 → 20.3': {
+    title: 'Legacy Angular 14.2 → 20.3 Migration',
+    description:
+      'Migration of a FIEMT legacy system from Angular 14.2 to Angular 20.3, modernizing architecture, components and front-end practices, with a new PrimeNG UI template standardizing look and usability.',
   },
   'Migração do WMS para PHP 8 + Docker': {
     title: 'WMS Migration to PHP 8 + Docker',
