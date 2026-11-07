@@ -120,19 +120,44 @@
           }
         </label>
 
-        <button type="submit" class="btn btn-primary">
-          Enviar mensagem
-          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M5 12h14m-6-6 6 6-6 6"
-            />
-          </svg>
+        <input
+          type="checkbox"
+          formControlName="botcheck"
+          class="honeypot"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+
+        <button type="submit" class="btn btn-primary" [disabled]="status() === 'sending'">
+          @if (status() === 'sending') {
+            <span class="spinner" aria-hidden="true"></span>
+            Enviando...
+          } @else {
+            Enviar mensagem
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M5 12h14m-6-6 6 6-6 6"
+              />
+            </svg>
+          }
         </button>
+
+        <div aria-live="polite">
+          @if (status() === 'success') {
+            <p class="feedback success">Mensagem enviada! Vou responder o mais rápido possível.</p>
+          } @else if (status() === 'error') {
+            <p class="feedback error">
+              Não foi possível enviar agora. Tente de novo ou me escreva em
+              <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>.
+            </p>
+          }
+        </div>
       </form>
     </div>
   </div>
