@@ -76,3 +76,17 @@ export interface GithubUser {
   followers: number;
   avatar_url: string;
 }
+
+export type Lang = 'pt' | 'en';
+
+/** Todo o conteúdo do portfólio em um idioma. */
+export interface PortfolioContent {
+  profile: Profile;
+  experiences: Experience[];
+  education: Education[];
+  courses: Course[];
+  skillGroups: SkillGroup[];
+  projects: Project[];
+  /** Arquivo do CV em public/ */
+  cv: string;
+}

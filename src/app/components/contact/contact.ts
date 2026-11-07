@@ -1,8 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PROFILE } from '../../data/portfolio.data';
 import { RevealDirective } from '../../directives/reveal.directive';
 import { ContactService } from '../../services/contact.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-contact',
@@ -12,6 +13,8 @@ import { ContactService } from '../../services/contact.service';
 })
 export class Contact {
   protected readonly profile = PROFILE;
+  private readonly i18n = inject(LanguageService);
+  protected readonly ui = computed(() => this.i18n.ui().contact);
   protected readonly whatsapp = `https://wa.me/${PROFILE.phone.replace(/\D/g, '')}`;
   protected readonly copied = signal(false);
   protected readonly status = signal<'idle' | 'sending' | 'success' | 'error'>('idle');

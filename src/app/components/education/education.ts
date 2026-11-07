@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { COURSES, EDUCATION } from '../../data/portfolio.data';
+import { Component, computed, inject } from '@angular/core';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-education',
@@ -9,19 +9,16 @@ import { RevealDirective } from '../../directives/reveal.directive';
     <section id="formacao" class="section">
       <div class="container">
         <header class="section-head" appReveal>
-          <span class="eyebrow">// formação</span>
-          <h2>Educação contínua</h2>
-          <p>
-            Graduação em Computação, especialização em Arquitetura de Software e pós em IA em
-            andamento.
-          </p>
+          <span class="eyebrow">{{ ui().eyebrow }}</span>
+          <h2>{{ ui().title }}</h2>
+          <p>{{ ui().subtitle }}</p>
         </header>
 
         <div class="grid">
-          @for (edu of education; track edu.course; let i = $index) {
+          @for (edu of content().education; track $index; let i = $index) {
             <article class="card edu" appReveal [revealDelay]="i * 90">
               <span class="status" [class.ongoing]="edu.status === 'em-andamento'">
-                {{ edu.status === 'em-andamento' ? 'Em andamento' : 'Concluído' }}
+                {{ edu.status === 'em-andamento' ? ui().ongoing : ui().done }}
               </span>
               <h3>{{ edu.course }}</h3>
               <p class="inst">{{ edu.institution }}</p>
@@ -31,9 +28,9 @@ import { RevealDirective } from '../../directives/reveal.directive';
         </div>
 
         <div class="courses card" appReveal>
-          <h3>Cursos e comunidade</h3>
+          <h3>{{ ui().courses }}</h3>
           <ul>
-            @for (course of courses; track course.name) {
+            @for (course of content().courses; track $index) {
               <li>
                 <span>{{ course.name }}</span>
                 <span class="chip">{{ course.provider }}</span>
@@ -123,6 +120,7 @@ import { RevealDirective } from '../../directives/reveal.directive';
   `,
 })
 export class EducationSection {
-  protected readonly education = EDUCATION;
-  protected readonly courses = COURSES;
+  private readonly i18n = inject(LanguageService);
+  protected readonly content = this.i18n.content;
+  protected readonly ui = computed(() => this.i18n.ui().education);
 }

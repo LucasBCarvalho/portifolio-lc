@@ -1,29 +1,28 @@
+@let t = ui();
 <section id="projetos" class="section">
   <div class="container">
     <header class="section-head" appReveal>
-      <span class="eyebrow">// projetos</span>
-      <h2>O que eu já construí</h2>
-      <p>
-        Projetos profissionais e pessoais/acadêmicos disponíveis no GitHub.
-      </p>
+      <span class="eyebrow">{{ t.eyebrow }}</span>
+      <h2>{{ t.title }}</h2>
+      <p>{{ t.subtitle }}</p>
     </header>
 
-    <div class="filters" role="tablist" aria-label="Filtrar projetos" appReveal>
-      @for (f of filters; track f.id) {
+    <div class="filters" role="tablist" [attr.aria-label]="t.filterLabel" appReveal>
+      @for (f of filters; track f) {
         <button
           type="button"
           role="tab"
-          [attr.aria-selected]="filter() === f.id"
-          [class.active]="filter() === f.id"
-          (click)="select(f.id)"
+          [attr.aria-selected]="filter() === f"
+          [class.active]="filter() === f"
+          (click)="select(f)"
         >
-          {{ f.label }} <span class="count">{{ count(f.id) }}</span>
+          {{ t.filters[f] }} <span class="count">{{ count(f) }}</span>
         </button>
       }
     </div>
 
     <div class="grid">
-      @for (project of visible(); track project.title) {
+      @for (project of visible(); track project.repo ?? project.title) {
         <article class="card project" [class.featured]="project.featured">
           <header>
             <span class="folder" aria-hidden="true">
@@ -43,8 +42,8 @@
                   [href]="project.repo"
                   target="_blank"
                   rel="noopener"
-                  [attr.aria-label]="'Código de ' + project.title"
-                  title="Código"
+                  [attr.aria-label]="t.codeOf + ' ' + project.title"
+                  [title]="t.code"
                 >
                   <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
                     <path
@@ -63,8 +62,8 @@
                   [href]="project.demo"
                   target="_blank"
                   rel="noopener"
-                  [attr.aria-label]="'Demo de ' + project.title"
-                  title="Ver online"
+                  [attr.aria-label]="t.demoOf + ' ' + project.title"
+                  [title]="t.demo"
                 >
                   <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
                     <path
@@ -79,7 +78,7 @@
                 </a>
               }
               @if (project.private) {
-                <span class="badge" title="Código proprietário">
+                <span class="badge" [title]="t.privateTitle">
                   <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
                     <path
                       fill="none"
@@ -88,7 +87,7 @@
                       d="M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3"
                     />
                   </svg>
-                  Privado
+                  {{ t.private }}
                 </span>
               }
             </div>
@@ -109,7 +108,7 @@
     @if (hiddenCount() > 0) {
       <div class="more">
         <button type="button" class="btn btn-ghost" (click)="showAll.set(true)">
-          Ver mais {{ hiddenCount() }} projetos
+          {{ t.showMore(hiddenCount()) }}
         </button>
       </div>
     }
@@ -117,9 +116,9 @@
     <!-- Atividade recente no GitHub (carregada em tempo real) -->
     <div class="github" appReveal>
       <div class="github-head">
-        <h3>Atividade recente no GitHub</h3>
+        <h3>{{ t.githubTitle }}</h3>
         @if (github.user(); as user) {
-          <span class="muted">{{ user.public_repos }} repositórios públicos</span>
+          <span class="muted">{{ t.publicRepos(user.public_repos) }}</span>
         }
         <a [href]="profile.github" target="_blank" rel="noopener" class="btn btn-ghost">
           &#64;{{ profile.githubUser }} ↗
@@ -134,18 +133,18 @@
           }
         </div>
       } @else if (repos === null) {
-        <p class="muted">Não foi possível carregar os repositórios agora. Veja direto no GitHub.</p>
+        <p class="muted">{{ t.githubError }}</p>
       } @else {
         <div class="repos">
           @for (repo of repos; track repo.name) {
             <a class="card repo" [href]="repo.html_url" target="_blank" rel="noopener">
               <strong>{{ repo.name }}</strong>
-              <span class="muted">{{ repo.description || 'Sem descrição' }}</span>
+              <span class="muted">{{ repo.description || t.noDescription }}</span>
               <span class="meta">
                 @if (repo.language) {
                   <span><i class="lang-dot"></i>{{ repo.language }}</span>
                 }
-                <span>atualizado {{ repo.updated_at | date: 'MM/yyyy' }}</span>
+                <span>{{ t.updated }} {{ repo.updated_at | date: 'MM/yyyy' }}</span>
               </span>
             </a>
           }

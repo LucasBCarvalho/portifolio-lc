@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { PROFILE } from '../../data/portfolio.data';
+import { Component, computed, inject } from '@angular/core';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-about',
@@ -9,19 +9,21 @@ import { RevealDirective } from '../../directives/reveal.directive';
     <section id="sobre" class="section">
       <div class="container">
         <header class="section-head" appReveal>
-          <span class="eyebrow">// sobre mim</span>
-          <h2>Do banco de dados à interface, <span class="gradient-text">com IA no meio</span></h2>
+          <span class="eyebrow">{{ ui().eyebrow }}</span>
+          <h2>
+            {{ ui().title }} <span class="gradient-text">{{ ui().titleHighlight }}</span>
+          </h2>
         </header>
 
         <div class="grid">
           <div class="text" appReveal>
-            @for (paragraph of profile.about; track $index) {
+            @for (paragraph of profile().about; track $index) {
               <p>{{ paragraph }}</p>
             }
           </div>
 
           <ul class="stats">
-            @for (item of profile.highlights; track item.label; let i = $index) {
+            @for (item of profile().highlights; track $index; let i = $index) {
               <li class="card" appReveal [revealDelay]="i * 90">
                 <strong class="gradient-text">{{ item.value }}</strong>
                 <span>{{ item.label }}</span>
@@ -84,5 +86,7 @@ import { RevealDirective } from '../../directives/reveal.directive';
   `,
 })
 export class About {
-  protected readonly profile = PROFILE;
+  private readonly i18n = inject(LanguageService);
+  protected readonly profile = computed(() => this.i18n.content().profile);
+  protected readonly ui = computed(() => this.i18n.ui().about);
 }

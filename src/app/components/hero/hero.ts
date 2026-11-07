@@ -1,13 +1,5 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { PROFILE } from '../../data/portfolio.data';
-
-const ROLES = [
-  'Angular',
-  'PHP 8 & MySQL',
-  'APIs REST',
-  'IA aplicada (RAG + MCP)',
-  'Arquitetura de Software',
-];
+import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-hero',
@@ -15,13 +7,16 @@ const ROLES = [
   styleUrl: './hero.scss',
 })
 export class Hero {
-  protected readonly profile = PROFILE;
+  protected readonly i18n = inject(LanguageService);
+  protected readonly profile = computed(() => this.i18n.content().profile);
   protected readonly typed = signal('');
 
   constructor() {
+    const roles = () => this.i18n.ui().hero.roles;
+
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) {
-      this.typed.set(ROLES[0]);
+      this.typed.set(roles()[0]);
       return;
     }
 
@@ -31,8 +26,9 @@ export class Hero {
     let timer: ReturnType<typeof setTimeout>;
 
     const tick = () => {
-      const role = ROLES[roleIndex];
-      charIndex += deleting ? -1 : 1;
+      // lê a lista a cada passo para acompanhar a troca de idioma
+      const role = roles()[roleIndex % roles().length];
+      charIndex = Math.min(charIndex + (deleting ? -1 : 1), role.length);
       this.typed.set(role.slice(0, charIndex));
 
       let delay = deleting ? 40 : 85;
@@ -41,7 +37,7 @@ export class Hero {
         delay = 1800;
       } else if (deleting && charIndex === 0) {
         deleting = false;
-        roleIndex = (roleIndex + 1) % ROLES.length;
+        roleIndex = (roleIndex + 1) % roles().length;
         delay = 350;
       }
       timer = setTimeout(tick, delay);

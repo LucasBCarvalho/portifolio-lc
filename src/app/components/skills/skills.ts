@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { SKILL_GROUPS } from '../../data/portfolio.data';
+import { Component, computed, inject } from '@angular/core';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-skills',
@@ -9,16 +9,13 @@ import { RevealDirective } from '../../directives/reveal.directive';
     <section id="skills" class="section">
       <div class="container">
         <header class="section-head" appReveal>
-          <span class="eyebrow">// stack</span>
-          <h2>Tecnologias que uso no dia a dia</h2>
-          <p>
-            Fullstack com base sólida em Angular e PHP, complementada por IA, dados e
-            infraestrutura.
-          </p>
+          <span class="eyebrow">{{ ui().eyebrow }}</span>
+          <h2>{{ ui().title }}</h2>
+          <p>{{ ui().subtitle }}</p>
         </header>
 
         <div class="grid">
-          @for (group of groups; track group.title; let i = $index) {
+          @for (group of groups(); track group.icon; let i = $index) {
             <article class="card group" appReveal [revealDelay]="(i % 3) * 90">
               <header>
                 <span class="icon" aria-hidden="true">{{ group.icon }}</span>
@@ -79,5 +76,7 @@ import { RevealDirective } from '../../directives/reveal.directive';
   `,
 })
 export class Skills {
-  protected readonly groups = SKILL_GROUPS;
+  private readonly i18n = inject(LanguageService);
+  protected readonly groups = computed(() => this.i18n.content().skillGroups);
+  protected readonly ui = computed(() => this.i18n.ui().skills);
 }

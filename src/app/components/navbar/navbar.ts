@@ -1,10 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
+import { LanguageService } from '../../services/language.service';
 import { ThemeService } from '../../services/theme.service';
 
-interface NavLink {
-  id: string;
-  label: string;
-}
+const SECTION_IDS = ['sobre', 'skills', 'experiencia', 'projetos', 'formacao', 'contato'] as const;
 
 @Component({
   selector: 'app-navbar',
@@ -17,14 +15,8 @@ interface NavLink {
 export class Navbar {
   protected readonly theme = inject(ThemeService);
 
-  protected readonly links: NavLink[] = [
-    { id: 'sobre', label: 'Sobre' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'experiencia', label: 'Trajetória' },
-    { id: 'projetos', label: 'Projetos' },
-    { id: 'formacao', label: 'Formação' },
-    { id: 'contato', label: 'Contato' },
-  ];
+  protected readonly i18n = inject(LanguageService);
+  protected readonly sections = SECTION_IDS;
 
   protected readonly scrolled = signal(false);
   protected readonly menuOpen = signal(false);
@@ -35,9 +27,9 @@ export class Navbar {
 
     const offset = window.innerHeight * 0.35;
     let current = '';
-    for (const link of this.links) {
-      const section = document.getElementById(link.id);
-      if (section && section.getBoundingClientRect().top <= offset) current = link.id;
+    for (const id of SECTION_IDS) {
+      const section = document.getElementById(id);
+      if (section && section.getBoundingClientRect().top <= offset) current = id;
     }
     this.active.set(current);
   }

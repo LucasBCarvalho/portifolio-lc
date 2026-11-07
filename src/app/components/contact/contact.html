@@ -1,12 +1,12 @@
+@let t = ui();
 <section id="contato" class="section">
   <div class="container">
     <header class="section-head" appReveal>
-      <span class="eyebrow">// contato</span>
-      <h2>Vamos <span class="gradient-text">conversar?</span></h2>
-      <p>
-        Estou aberto a oportunidades como desenvolvedor fullstack Angular/PHP, freelas e projetos
-        com IA.
-      </p>
+      <span class="eyebrow">{{ t.eyebrow }}</span>
+      <h2>
+        {{ t.title }} <span class="gradient-text">{{ t.titleHighlight }}</span>
+      </h2>
+      <p>{{ t.subtitle }}</p>
     </header>
 
     <div class="grid">
@@ -25,7 +25,7 @@
             </svg>
           </span>
           <span class="info">
-            <small>E-mail {{ copied() ? '· copiado!' : '· clique para copiar' }}</small>
+            <small>{{ t.email }} {{ copied() ? t.copied : t.clickToCopy }}</small>
             <strong>{{ profile.email }}</strong>
           </span>
         </button>
@@ -88,35 +88,40 @@
         [revealDelay]="100"
       >
         <label>
-          <span>Nome</span>
-          <input type="text" formControlName="name" autocomplete="name" placeholder="Seu nome" />
+          <span>{{ t.name }}</span>
+          <input
+            type="text"
+            formControlName="name"
+            autocomplete="name"
+            [placeholder]="t.namePlaceholder"
+          />
           @if (invalid('name')) {
-            <small class="error">Informe seu nome.</small>
+            <small class="error">{{ t.nameError }}</small>
           }
         </label>
 
         <label>
-          <span>E-mail</span>
+          <span>{{ t.email }}</span>
           <input
             type="email"
             formControlName="email"
             autocomplete="email"
-            placeholder="voce@empresa.com"
+            [placeholder]="t.emailPlaceholder"
           />
           @if (invalid('email')) {
-            <small class="error">Informe um e-mail válido.</small>
+            <small class="error">{{ t.emailError }}</small>
           }
         </label>
 
         <label>
-          <span>Mensagem</span>
+          <span>{{ t.message }}</span>
           <textarea
             formControlName="message"
             rows="5"
-            placeholder="Conte um pouco sobre a oportunidade ou projeto..."
+            [placeholder]="t.messagePlaceholder"
           ></textarea>
           @if (invalid('message')) {
-            <small class="error">A mensagem precisa ter pelo menos 10 caracteres.</small>
+            <small class="error">{{ t.messageError }}</small>
           }
         </label>
 
@@ -132,9 +137,9 @@
         <button type="submit" class="btn btn-primary" [disabled]="status() === 'sending'">
           @if (status() === 'sending') {
             <span class="spinner" aria-hidden="true"></span>
-            Enviando...
+            {{ t.sending }}
           } @else {
-            Enviar mensagem
+            {{ t.send }}
             <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
               <path
                 fill="none"
@@ -150,11 +155,12 @@
 
         <div aria-live="polite">
           @if (status() === 'success') {
-            <p class="feedback success">Mensagem enviada! Vou responder o mais rápido possível.</p>
+            <p class="feedback success">{{ t.success }}</p>
           } @else if (status() === 'error') {
             <p class="feedback error">
-              Não foi possível enviar agora. Tente de novo ou me escreva em
-              <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>.
+              {{ t.error }}
+              <a [href]="'mailto:' + profile.email">{{ profile.email }}</a
+              >.
             </p>
           }
         </div>

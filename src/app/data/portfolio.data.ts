@@ -2,6 +2,7 @@ import {
   Course,
   Education,
   Experience,
+  PortfolioContent,
   Profile,
   Project,
   SkillGroup,
@@ -134,15 +135,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
   {
     title: 'Back-end',
     icon: '⚙',
-    skills: [
-      'PHP 8',
-      'Java',
-      'Spring Boot',
-      'Python',
-      'Flask',
-      'APIs REST',
-      'Integração de APIs',
-    ],
+    skills: ['PHP 8', 'Java', 'Spring Boot', 'Python', 'Flask', 'APIs REST', 'Integração de APIs'],
   },
   {
     title: 'Banco de dados',
@@ -305,3 +298,13 @@ export const PROJECTS: Project[] = [
     demo: 'https://projeto-costs-beta.vercel.app',
   },
 ];
+
+export const CONTENT_PT: PortfolioContent = {
+  profile: PROFILE,
+  experiences: EXPERIENCES,
+  education: EDUCATION,
+  courses: COURSES,
+  skillGroups: SKILL_GROUPS,
+  projects: PROJECTS,
+  cv: 'cv-lucas-carvalho-pt.pdf',
+};

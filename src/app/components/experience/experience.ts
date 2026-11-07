@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { EXPERIENCES } from '../../data/portfolio.data';
+import { Component, computed, inject } from '@angular/core';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-experience',
@@ -9,15 +9,13 @@ import { RevealDirective } from '../../directives/reveal.directive';
     <section id="experiencia" class="section">
       <div class="container">
         <header class="section-head" appReveal>
-          <span class="eyebrow">// trajetória</span>
-          <h2>Experiência profissional</h2>
-          <p>
-            De estagiário a desenvolvedor colocando IA em produção e modernizando front-ends Angular.
-          </p>
+          <span class="eyebrow">{{ ui().eyebrow }}</span>
+          <h2>{{ ui().title }}</h2>
+          <p>{{ ui().subtitle }}</p>
         </header>
 
         <ol class="timeline">
-          @for (exp of experiences; track exp.role + exp.company) {
+          @for (exp of experiences(); track $index) {
             <li appReveal>
               <span class="marker" [class.current]="exp.current" aria-hidden="true"></span>
               <article class="card item">
@@ -147,5 +145,7 @@ import { RevealDirective } from '../../directives/reveal.directive';
   `,
 })
 export class ExperienceSection {
-  protected readonly experiences = EXPERIENCES;
+  private readonly i18n = inject(LanguageService);
+  protected readonly experiences = computed(() => this.i18n.content().experiences);
+  protected readonly ui = computed(() => this.i18n.ui().experience);
 }

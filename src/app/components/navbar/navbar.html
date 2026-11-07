@@ -1,13 +1,14 @@
 <header class="nav" [class.scrolled]="scrolled()" [class.open]="menuOpen()">
   <div class="container nav-inner">
-    <a href="#inicio" class="logo" (click)="closeMenu()" aria-label="Voltar ao início">
+    @let ui = i18n.ui().nav;
+    <a href="#inicio" class="logo" (click)="closeMenu()" [attr.aria-label]="ui.home">
       <span class="bracket">&lt;</span>LC<span class="bracket"> /&gt;</span>
     </a>
 
-    <nav id="menu" class="links" aria-label="Navegação principal">
-      @for (link of links; track link.id) {
-        <a [href]="'#' + link.id" [class.active]="active() === link.id" (click)="closeMenu()">{{
-          link.label
+    <nav id="menu" class="links" [attr.aria-label]="ui.main">
+      @for (id of sections; track id) {
+        <a [href]="'#' + id" [class.active]="active() === id" (click)="closeMenu()">{{
+          ui.links[id]
         }}</a>
       }
     </nav>
@@ -15,9 +16,19 @@
     <div class="actions">
       <button
         type="button"
+        class="icon-btn lang-btn"
+        (click)="i18n.toggle()"
+        [attr.aria-label]="ui.switchLang"
+        [title]="ui.switchLang"
+      >
+        {{ i18n.lang() === 'pt' ? 'EN' : 'PT' }}
+      </button>
+
+      <button
+        type="button"
         class="icon-btn"
         (click)="theme.toggle()"
-        [attr.aria-label]="theme.theme() === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'"
+        [attr.aria-label]="theme.theme() === 'dark' ? ui.themeLight : ui.themeDark"
       >
         @if (theme.theme() === 'dark') {
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
@@ -41,7 +52,7 @@
         (click)="toggleMenu()"
         aria-controls="menu"
         [attr.aria-expanded]="menuOpen()"
-        aria-label="Abrir menu"
+        [attr.aria-label]="ui.menu"
       >
         <span></span><span></span><span></span>
       </button>

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PROFILE } from '../../data/portfolio.data';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +8,7 @@ import { PROFILE } from '../../data/portfolio.data';
     <footer>
       <div class="container inner">
         <p>© {{ year }} {{ profile.name }}</p>
-        <a href="#inicio" class="top">Voltar ao topo ↑</a>
+        <a href="#inicio" class="top">{{ i18n.ui().footer.backToTop }}</a>
       </div>
     </footer>
   `,
@@ -37,6 +38,7 @@ import { PROFILE } from '../../data/portfolio.data';
   `,
 })
 export class Footer {
+  protected readonly i18n = inject(LanguageService);
   protected readonly profile = PROFILE;
   protected readonly year = new Date().getFullYear();
 }

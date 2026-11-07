@@ -1,9 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
-import { PROFILE, PROJECTS } from '../../data/portfolio.data';
+import { PROFILE } from '../../data/portfolio.data';
 import { RevealDirective } from '../../directives/reveal.directive';
 import { ProjectCategory } from '../../models/portfolio.models';
 import { GithubService } from '../../services/github.service';
+import { LanguageService } from '../../services/language.service';
 
 type Filter = 'todos' | ProjectCategory;
 
@@ -19,13 +20,17 @@ export class Projects {
   protected readonly github = inject(GithubService);
   protected readonly profile = PROFILE;
 
-  protected readonly filters: { id: Filter; label: string }[] = [
-    { id: 'todos', label: 'Todos' },
-    { id: 'profissional', label: 'Profissional' },
-    { id: 'angular', label: 'Angular' },
-    { id: 'php', label: 'PHP' },
-    { id: 'ia', label: 'IA' },
-    { id: 'outros', label: 'Outros' },
+  private readonly i18n = inject(LanguageService);
+  protected readonly ui = computed(() => this.i18n.ui().projects);
+  private readonly projects = computed(() => this.i18n.content().projects);
+
+  protected readonly filters: Filter[] = [
+    'todos',
+    'profissional',
+    'angular',
+    'php',
+    'ia',
+    'outros',
   ];
 
   protected readonly filter = signal<Filter>('todos');
@@ -33,7 +38,8 @@ export class Projects {
 
   private readonly filtered = computed(() => {
     const f = this.filter();
-    return f === 'todos' ? PROJECTS : PROJECTS.filter((p) => p.categories.includes(f));
+    const all = this.projects();
+    return f === 'todos' ? all : all.filter((p) => p.categories.includes(f));
   });
 
   protected readonly visible = computed(() =>
@@ -43,9 +49,8 @@ export class Projects {
   protected readonly hiddenCount = computed(() => this.filtered().length - this.visible().length);
 
   protected count(id: Filter): number {
-    return id === 'todos'
-      ? PROJECTS.length
-      : PROJECTS.filter((p) => p.categories.includes(id)).length;
+    const all = this.projects();
+    return id === 'todos' ? all.length : all.filter((p) => p.categories.includes(id)).length;
   }
 
   protected select(id: Filter): void {
