@@ -40,7 +40,7 @@ export const EXPERIENCES: Experience[] = [
     company: 'FIEMT',
     role: 'Bolsista de Pesquisa e Desenvolvimento',
     location: 'Cuiabá - MT',
-    period: '04/2026 — Atual',
+    period: '04/2026 - Atual',
     current: true,
     bullets: [
       'Migração de sistema legado em Angular para Angular 20, modernizando arquitetura, componentes e práticas de front-end.',
@@ -53,7 +53,7 @@ export const EXPERIENCES: Experience[] = [
     company: 'Giusoft Tecnologia',
     role: 'Desenvolvedor Júnior',
     location: 'Lauro de Freitas - BA',
-    period: '01/2025 — Atual',
+    period: '01/2025 - Atual',
     current: true,
     bullets: [
       'Desenvolvimento e manutenção de sistemas web em PHP e MySQL, com otimização de queries e correção de bugs.',
@@ -68,7 +68,7 @@ export const EXPERIENCES: Experience[] = [
     company: 'Giusoft Tecnologia',
     role: 'Estagiário',
     location: 'Lauro de Freitas - BA',
-    period: '05/2024 — 01/2025',
+    period: '05/2024 - 01/2025',
     bullets: [
       'Participou de testes e implementação de sistemas.',
       'Auxiliou na criação e implantação de novas soluções.',
@@ -91,13 +91,13 @@ export const EXPERIENCES: Experience[] = [
 
 export const EDUCATION: Education[] = [
   {
-    institution: 'Unime — Campus Lauro de Freitas',
+    institution: 'Unime - Campus Lauro de Freitas',
     course: 'Pós-graduação em Inteligência Artificial e Data Science',
     period: 'Previsão: 11/2026',
     status: 'em-andamento',
   },
   {
-    institution: 'Unime — Campus Lauro de Freitas',
+    institution: 'Unime - Campus Lauro de Freitas',
     course: 'Pós-graduação em Arquitetura de Software',
     period: 'Concluído em 01/2026',
     status: 'concluido',
@@ -111,7 +111,7 @@ export const EDUCATION: Education[] = [
 ];
 
 export const COURSES: Course[] = [
-  { name: 'Santander Coders 2024 — Front-End / Angular (finalista TOP 300)', provider: 'ADA Tech' },
+  { name: 'Santander Coders 2024 - Front-End / Angular (finalista TOP 300)', provider: 'ADA Tech' },
   { name: 'Python', provider: 'Data Science Academy' },
   { name: 'Embaixador DIO Campus Expert', provider: 'DIO' },
 ];
@@ -276,7 +276,7 @@ export const PROJECTS: Project[] = [
   {
     title: 'Acervo ADA',
     description:
-      'Acervo com CRUD usando Orientação a Objetos em TypeScript — entrega do módulo 3 do Santander Coders.',
+      'Acervo com CRUD usando Orientação a Objetos em TypeScript - entrega do módulo 3 do Santander Coders.',
     stack: ['TypeScript', 'POO'],
     categories: ['outros'],
     repo: `${GH}/acervo-ada`,

@@ -49,7 +49,7 @@ export class Contact {
 
     // sem chave configurada: abre o cliente de e-mail do visitante como alternativa
     if (!this.contact.configured) {
-      const subject = encodeURIComponent(`Contato pelo portfólio — ${name}`);
+      const subject = encodeURIComponent(`Contato pelo portfólio - ${name}`);
       const body = encodeURIComponent(`${message}\n\n${name}\n${email}`);
       window.location.href = `mailto:${PROFILE.email}?subject=${subject}&body=${body}`;
       return;

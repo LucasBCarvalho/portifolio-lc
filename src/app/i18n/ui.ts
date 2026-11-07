@@ -5,7 +5,7 @@ const PT = {
   meta: {
     title: 'Lucas Carvalho | Desenvolvedor Fullstack Angular & PHP',
     description:
-      'Portfólio de Lucas Borges de Carvalho — Desenvolvedor Fullstack (Angular, PHP, MySQL) com foco em Arquitetura de Software e Automação com IA.',
+      'Portfólio de Lucas Borges de Carvalho - Desenvolvedor Fullstack (Angular, PHP, MySQL) com foco em Arquitetura de Software e Automação com IA.',
   },
   nav: {
     links: {
@@ -124,7 +124,7 @@ const EN: UiStrings = {
   meta: {
     title: 'Lucas Carvalho | Fullstack Developer Angular & PHP',
     description:
-      'Portfolio of Lucas Borges de Carvalho — Fullstack Developer (Angular, PHP, MySQL) focused on Software Architecture and AI Automation.',
+      'Portfolio of Lucas Borges de Carvalho - Fullstack Developer (Angular, PHP, MySQL) focused on Software Architecture and AI Automation.',
   },
   nav: {
     links: {

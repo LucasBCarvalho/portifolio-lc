@@ -37,7 +37,7 @@ const EXPERIENCES_EN: Experience[] = [
     company: 'FIEMT',
     role: 'Research & Development Fellow',
     location: 'Cuiabá - MT',
-    period: '04/2026 — Present',
+    period: '04/2026 - Present',
     current: true,
     bullets: [
       'Migrating a legacy Angular system to Angular 20, modernizing architecture, components and front-end practices.',
@@ -50,7 +50,7 @@ const EXPERIENCES_EN: Experience[] = [
     company: 'Giusoft Tecnologia',
     role: 'Junior Developer',
     location: 'Lauro de Freitas - BA',
-    period: '01/2025 — Present',
+    period: '01/2025 - Present',
     current: true,
     bullets: [
       'Development and maintenance of web systems in PHP and MySQL, including query optimization and bug fixing.',
@@ -65,7 +65,7 @@ const EXPERIENCES_EN: Experience[] = [
     company: 'Giusoft Tecnologia',
     role: 'Intern',
     location: 'Lauro de Freitas - BA',
-    period: '05/2024 — 01/2025',
+    period: '05/2024 - 01/2025',
     bullets: [
       'Took part in system testing and implementation.',
       'Assisted in creating and deploying new solutions.',
@@ -88,13 +88,13 @@ const EXPERIENCES_EN: Experience[] = [
 
 const EDUCATION_EN: Education[] = [
   {
-    institution: 'Unime — Lauro de Freitas Campus',
+    institution: 'Unime - Lauro de Freitas Campus',
     course: 'Postgraduate Degree in Artificial Intelligence and Data Science',
     period: 'Expected: 11/2026',
     status: 'em-andamento',
   },
   {
-    institution: 'Unime — Lauro de Freitas Campus',
+    institution: 'Unime - Lauro de Freitas Campus',
     course: 'Postgraduate Degree in Software Architecture',
     period: 'Completed 01/2026',
     status: 'concluido',
@@ -108,7 +108,7 @@ const EDUCATION_EN: Education[] = [
 ];
 
 const COURSES_EN: Course[] = [
-  { name: 'Santander Coders 2024 — Front-End / Angular (TOP 300 finalist)', provider: 'ADA Tech' },
+  { name: 'Santander Coders 2024 - Front-End / Angular (TOP 300 finalist)', provider: 'ADA Tech' },
   { name: 'Python', provider: 'Data Science Academy' },
   { name: 'DIO Campus Expert Ambassador', provider: 'DIO' },
 ];
@@ -227,7 +227,7 @@ const PROJECT_TRANSLATIONS: Record<string, Partial<Project>> = {
   'Acervo ADA': {
     title: 'ADA Collection',
     description:
-      'Collection manager with CRUD using Object-Oriented Programming in TypeScript — Santander Coders module 3 project.',
+      'Collection manager with CRUD using Object-Oriented Programming in TypeScript - Santander Coders module 3 project.',
     stack: ['TypeScript', 'OOP'],
   },
   EpiResolve: {

@@ -25,7 +25,7 @@ export class ContactService {
     return this.http
       .post<Web3FormsResponse>('https://api.web3forms.com/submit', {
         access_key: WEB3FORMS_ACCESS_KEY,
-        subject: `Contato pelo portfólio — ${msg.name}`,
+        subject: `Contato pelo portfólio - ${msg.name}`,
         from_name: 'Portfólio Lucas Carvalho',
         name: msg.name,
         email: msg.email,
